@@ -1,0 +1,48 @@
+.tasklist{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.tasklist>li{
+    display: flex;
+}
+.task-entry{
+    background-color: white;
+    border: 3px solid black;
+    box-shadow: 5px 5px 5px rgba(0,0,0, 0.5);
+    min-width: 50vw;
+    margin-top: -0.4rem;
+}
+.cat_time{
+    display: flex;
+    justify-content: space-between;
+}
+.nothing{
+    text-align: center;
+    margin-top: 25%;
+}
+.ok-or-cancel{
+    display: flex;
+    align-items: center;
+}
+.ok-or-cancel button{
+    border-radius: 10rem;
+    cursor: pointer;
+}
+.check{
+    background-color: rgb(95, 241, 95);
+}
+.bin{
+    background-color: rgb(243, 97, 97);
+}
+.task-entry-done{
+    background-color: #00ff00;
+    transition: opacity 2s;
+    opacity: 0;
+}
+.task-not-done{
+    background-color: red;
+    transition: opacity 2s linear;
+    opacity: 0
+}

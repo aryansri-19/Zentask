@@ -1,0 +1,143 @@
+:root{
+    --greyc : rgb(227, 227, 227);
+    --bluec : rgb(41, 128, 242);
+    --nav : #666666;
+}
+
+body{
+    margin:0 !important;
+    padding:0 !important;
+    box-sizing: border-box;
+    background-color: var(--greyc)
+}
+.grid-container{
+    position:relative;
+    display:grid;
+    grid-template-areas:  
+    "sidebar navbar"
+    "sidebar main"
+    "sidebar footer";
+    grid-template-rows: 10vh 1fr 8vh;
+    grid-template-columns: 20vw 1fr;
+    height: 94vh;
+}
+.navbar{
+    grid-area: navbar;
+    background-color: var(--nav);
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    border-radius: 10px;
+    color: var(--greyc);
+}
+.sidebar{
+    grid-area: sidebar;
+    display: flex;
+    background-color: var(--bluec);
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+.main{
+    grid-area: main;
+    border-radius: 10px;
+    overflow: auto;
+    scrollbar-width: 7px;
+}   
+.footer{
+    grid-area: footer;
+    border-top:1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.banner{
+    width: 17vw;
+    margin:0;
+    border-radius: 0.9rem;
+}
+.search-bar>input{
+    width:16vw;
+    background: white url('../images/search.svg') no-repeat 0 center;
+    padding: 0.2rem 0 0.2rem 40px;
+    border-radius: 0.5rem
+}
+.panel-one-list{
+    list-style: none;
+    color: var(--greyc);
+    width:16vw;
+    margin:0;
+    padding-left:0;
+}
+li{
+    padding-top: 0.6rem
+}
+.divider{
+    height: 0.3rem;
+    background-color: var(--greyc);
+    cursor: pointer;
+    
+}
+.panel_one_item:hover{
+    opacity: 0.8;
+    cursor: pointer;
+    border-width: 1px;
+    border-bottom-style: solid;
+    animation: moveUp 0.2s linear forwards;
+}
+@keyframes moveUp {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-0.2rem);
+    }
+    100%{
+        transform: translateY(-0.3rem);
+    }
+}
+.create-new-btn{
+    border-radius: 1.5rem 1.5rem;
+    width: 80%;
+    background-color: orange;
+    cursor: pointer;
+    font-weight: 800;
+}
+.right_footer{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.left-container, .right-container{
+    margin-top: 0.4rem;
+    display: flex;
+    cursor: pointer;
+}
+.home_theme{
+    height: 30px;
+    cursor: pointer;
+    &:hover{
+        animation: rotate 2s infinite linear;
+    }
+}
+@keyframes rotate{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.panel-one-list img{
+    height: 15px;
+    position: relative;
+}
+
+.panel_extra_item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

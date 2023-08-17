@@ -1,0 +1,60 @@
+.floating-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+.task-name, .cat-name, .time {
+    display: flex;
+    align-items: center;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+}
+.cat-name input{
+    width: 100%;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+}
+#desc{
+    width: 26.5rem;
+    height: 11rem;
+    border: 2px solid black;
+    border-radius: 10px;
+    resize: none;
+    padding: 0.5rem;
+}
+#name, #cat{
+    border: 2px solid black;
+    padding: 0.5rem;
+}
+.floating-panel{
+    border-radius: 0.5rem
+}
+#time{
+    width: 15rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+}
+.add-button{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+.add-btn, .add-btn-side{
+    width: 30%;
+    background-color: orange;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.add-btn-side{
+    width: 20%;
+}
