@@ -23,7 +23,7 @@ export default function GetStarted(props){
                     Streamline your to-do list with a serene and intuitive interface. Set priorities, track progress, and achieve your goals effortlessly. 
                     Collaborate with ease and maintain work-life balance. Embrace tranquility and efficiency with ZenTask!</p>
             </div>
-            <Link to="/home"><button className='getstarted'>Get Started</button></Link>
+            <Link to="/register"><button className='getstarted'>Get Started</button></Link>
         </main>
         </div>
     )

@@ -29,8 +29,8 @@ export default function Signup(props) {
         try {
             axios.post('http://localhost:3000/register', user)
                 .then(res => {
-                    if (res.data === 'exist')
-                        history("/home", { state: { id: user.username } })
+                    if (res.data.status === 'exist')
+                        history(`/home/${res.data.username}`, { state: { id: res.data.username } })
                     else {
                         alert('User does not exist. Register yourself')
                         setLogin(false)
@@ -55,7 +55,7 @@ export default function Signup(props) {
                         setLogin(true)
                     }
                     else
-                        history("/home", { state: { id: user.username } })
+                        history(`/home/${user.username}`, { state: { id: user.username } })
                 })
                 .catch(e => {
                     alert('Wrong details')
@@ -96,9 +96,9 @@ export default function Signup(props) {
                             </div>
                         </div>}
                         {login && <div>
-                            <div className="name_div">
-                                <label htmlFor="name">
-                                    <h4 style={{ color: `${props.mode === 'light' ? 'black' : '#faf9f9'}`}}>Username</h4><input placeholder='Your username' type="text" name="username" id="name" required onChange={handleChange} autoComplete="off" />
+                            <div className="email_div">
+                                <label htmlFor="email">
+                                    <h4 style={{ color: `${props.mode === 'light' ? 'black' : '#faf9f9'}`}}>Email</h4><input placeholder='Your email' type="email" name="email" id="email" required onChange={handleChange} autoComplete="off" />
                                 </label>
                             </div>
                             <div className="pass_div">

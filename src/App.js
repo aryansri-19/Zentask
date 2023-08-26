@@ -23,7 +23,7 @@ function App() {
    <Routes>
     <Route exact path='/' element={<GetStarted mode={mode} toggleMode={toggleMode}/>}/>
     <Route exact path='/register' element={<Signup mode={mode} toggleMode={toggleMode}/>}/>
-    <Route exact path='/home' element={<Home mode={mode} toggleMode={toggleMode}/>}/>
+    <Route exact path='/home/:id/*' element={<Home mode={mode} toggleMode={toggleMode}/>}/>
    </Routes>
    </BrowserRouter>
    </div>

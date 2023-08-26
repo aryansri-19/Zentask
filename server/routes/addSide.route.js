@@ -4,7 +4,7 @@ const CategoryModel = require('../models/category.model')
 
 router.get('/all_cats', async (req, res)=>{
   try{
-    const cats = await CategoryModel.find({})
+    const cats = await CategoryModel.find({user_id: req.query.id})
     res.status(200).send(cats)
   }catch{
     res.status(500).send({ error: 'Could not get categories' })

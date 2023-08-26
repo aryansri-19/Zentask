@@ -36,6 +36,9 @@
 .bin{
     background-color: rgb(243, 97, 97);
 }
+.bin > img{
+    height: 1.6rem;
+}
 .task-entry-done{
     background-color: #00ff00;
     transition: opacity 2s;

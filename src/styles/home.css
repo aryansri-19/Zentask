@@ -115,6 +115,9 @@ li{
     display: flex;
     cursor: pointer;
 }
+.right-container{
+    box-shadow: 0 0 0.5rem black;
+}
 .home_theme{
     height: 30px;
     cursor: pointer;
@@ -140,4 +143,5 @@ li{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }

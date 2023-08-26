@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import bin from '../images/dustbin.png';
@@ -10,17 +10,14 @@ export default function Dashboard(props) {
     if (props.taskarray.filter((prev) => prev.done === 0).length === 0)
         showNothing = true
 
-    // const [isTaskDone, setIsTaskDone] = useState({});
-    // const [deletedTasks, setDeletedTasks] = useState({});
-
     const taskDone = (taskName, value) => {
         setTimeout(async () => {
             try {
                 if (value) {
-                    await axios.post('http://localhost:3000/home/update-task', { task_name: taskName, done: value })
+                    await axios.post('http://localhost:3000/home/update-task', { user_id: props.user_id, task_name: taskName, done: value })
                         .then(toast.success('Task updated', {
                             position: "top-right",
-                            autoClose: 2000,
+                            autoClose: 500,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -30,10 +27,10 @@ export default function Dashboard(props) {
                             }))
                 }
                 else {
-                    await axios.post('http://localhost:3000/home/delete-task', { task_name: taskName })
+                    await axios.post('http://localhost:3000/home/delete-task', { user_id: props.user_id, task_name: taskName })
                         .then(toast.info('Task deleted', {
                             position: "top-right",
-                            autoClose: 2000,
+                            autoClose: 500,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -48,8 +45,9 @@ export default function Dashboard(props) {
             catch (err) {
                 console.log('Error deleting/updating task')
             }
-        }, 1000);
+        }, 500);
     }
+
     return (
         <div className="tasks">
             {!showNothing && props.taskarray.map((ele) => {

@@ -8,6 +8,7 @@ export default function CreateNew(props){
     const currTime = currTimes.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true} )
     const [task, setTask] = useState(
         {
+            user_id: props.user_id,
             task_name: '',
             cat:'',
             start_date: '',
@@ -24,12 +25,12 @@ export default function CreateNew(props){
             var hour = value.split(":")
             if(Number(hour[0])>=12)
             {
-                hh = (Number(hour[0]) - 12).toString()
+                hh = hour[0] === '12' ? '12' : (Number(hour[0]) - 12).toString()
                 tt = 'P.M'
             }
             else
             {
-                hh = hour[0]
+                hh = hour[0] === '00' ? '12' : hour[0]
                 tt = 'A.M'
             }
             setTask({

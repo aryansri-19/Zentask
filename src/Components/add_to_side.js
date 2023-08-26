@@ -3,7 +3,7 @@ import cross from '../images/cross.png';
 import axios from 'axios';
 
 export default function AddToSide(props) {
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState({user_id: props.user_id, name: ''})
   const handleChange = (e) => {
     setCategory({ ...category, name: e.target.value})
   }
