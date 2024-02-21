@@ -17,6 +17,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/zentask", { useNewUrlParser: true, u
 const routes = require('./routes')
 app.use('/', routes)
 
-app.listen(3000, ()=>{
+app.listen(8080, ()=>{
     console.log("Connection established")
 })

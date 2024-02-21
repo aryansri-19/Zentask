@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../styles/create_new.css';
 import cross from '../images/cross.png';
 import axios from "axios";
+import { toast } from "react-toastify";
 export default function CreateNew(props){
     const currTimes = new Date()
     const currDate = currTimes.toISOString().split('T')[0]
@@ -42,6 +43,19 @@ export default function CreateNew(props){
     }
     const handleAdding = (e)=>{
         e.preventDefault()
+        if(!task.task_name || !task.cat || !task.desc)
+        {
+            toast.warning(`Information is not complete`, {
+                position: "top-left",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            })
+            console.log(e)
+            return
+        }
         try{
             axios.post('http://localhost:3000/home/new_task', task)
             .then((res)=>{
@@ -69,7 +83,7 @@ export default function CreateNew(props){
             <div className="task-name">
                 <h4>Task : </h4>
                 <label htmlFor='name'>
-                    <input type='text' id='name' name='task_name' required placeholder="Unique Task 1" onChange={handleChange}/>
+                    <input type='text' id='name' name='task_name' placeholder="Unique Task 1" onChange={handleChange}/>
                 </label>
             </div>
             <div className="cat-name">

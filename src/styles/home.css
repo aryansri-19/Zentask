@@ -79,7 +79,7 @@ li{
     cursor: pointer;
     
 }
-.panel_one_item:hover{
+.panel_one_item:hover, .panel_extra_item:hover{
     opacity: 0.8;
     cursor: pointer;
     border-width: 1px;

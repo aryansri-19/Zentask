@@ -9,9 +9,12 @@ import dark from '../images/weather.png'
 import Dashboard from "./dashboard";
 import CreateNew from "./create_new";
 import AddToSide from './add_to_side';
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import Notifications from "./notifications";
 export default function Home(props) {
+    const history = useNavigate();
+    const username = useParams();
     const panel_one = ['Dashboard', 'Notifications', 'Goals']
     const [allStates, setAllStates] = useState({
         navtext: panel_one[0],
@@ -21,7 +24,7 @@ export default function Home(props) {
         addToSide: false,
         displayFeat: false
     })
-    const user = useLocation();
+
     const setShowCreatePanel = () => setAllStates({ ...allStates, showCreatePanel: !allStates.showCreatePanel})
     const setAddToSide = () => setAllStates({ ...allStates, addToSide: !allStates.addToSide})
     const setDisplayFeat = () => setAllStates({ ...allStates, displayFeat: !allStates.displayFeat})
@@ -40,51 +43,62 @@ export default function Home(props) {
 
     const [taskArray, setTaskArray] = useState([])
     const [categoryArray, setCategoryArray] = useState([])
-
     function checkNotfication(task){
         const startTime = new Date(`${task.start_date} ${task.start_time.replace(".", "").toUpperCase()}`)  
         const currentTime = new Date();
         const timeDifference = startTime.getTime() - currentTime.getTime();
         const minutesDifference = timeDifference / (1000 * 60);
-        if (minutesDifference == 30 || minutesDifference == 10 || minutesDifference == 5) {
+        if (minutesDifference === 30 || minutesDifference === 10 || minutesDifference === 5) {
             toast.warning(`Reminder: Task "${task.task_name}" starts in ${minutesDifference} minutes.`, {
                 position: "bottom-right",
                 autoClose: 5000,
-                hideProgressBar: false,
+                hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
                 progress: undefined,
             })
         }
+
+        // audio.play();
     }
     useEffect(() => {
         taskArray.forEach((task)=> checkNotfication(task))
             }, [taskArray])
     useEffect(()=>{
-        axios.get(`http://localhost:3000/home/all_tasks?id=${user.state.id}`)
+        axios.get(`http://localhost:3000/home/all_tasks?id=${username.id}`)
         .then((res)=> {
             setTaskArray(res.data)
         })
         .catch((err)=>{
             console.error("Error fetching tasks", err)
         })
-    }, [taskArray, user.state.id]) 
+    }, [taskArray, username.id]) 
     useEffect(() => {
-        axios.get(`http://localhost:3000/home/all_cats?id=${user.state.id}`)
+        axios.get(`http://localhost:3000/home/all_cats?id=${username.id}`)
         .then((res)=>{
             setCategoryArray(res.data.map((ele)=>ele.name))
         })
         .catch((err)=>{
             console.log("Error fetching categories", err)
         })
-    }, [categoryArray, user.state.id])
+    }, [categoryArray, username.id])
 
     const deleteSide = async (e) => {
-        await axios.post(`http://localhost:3000/home/delete_cat?id=${user.state.id}`, {name: e.target.value})
+        await axios.post(`http://localhost:3000/home/delete_cat?id=${username.id}`, {name: e.target.value})
         .then(console.log("Deleted"))
         .catch((err)=>{
             console.log("Error deleting category", err)
         })
+    }
+
+    const handlePath = (ele) => {
+        setAllStates({...allStates, navtext: ele}); 
+        if(ele==='Dashboard')
+            history(`/home/${username.id}`)
+        else
+            history(`/home/${username.id}/${ele}`)
+
+        // console.log(username.id)
     }
     
     const combinedList = [...panel_one_ext, ...categoryArray]
@@ -112,9 +126,9 @@ export default function Home(props) {
                 <div className="panel-one">
                     <ul className="panel-one-list">
                         {panel_one.map((ele)=>
-                        <li key={ele} className='panel_one_item' onClick={()=>setAllStates({...allStates, navtext: ele})}>{ele}</li>)}
+                        <li key={ele} className='panel_one_item' onClick={()=>handlePath(ele)}>{ele}</li>)}
                         { allStates.expand && combinedList.map((ele)=>
-                        <><li key={ele} className='panel_extra_item' onClick={()=>setAllStates({...allStates, navtext: ele})}>{ele}</li></>)}
+                        <><li key={ele} className='panel_extra_item' onClick={()=>handlePath(ele)}>{ele}</li></>)}
                     </ul>
                     <hr className="divider" onClick={()=>setAllStates({ ...allStates, expand: !allStates.expand})}/>
                 </div>
@@ -124,8 +138,8 @@ export default function Home(props) {
             <div className="main">
                 <div className="main_container">
                     <Routes>
-                    <Route path='/' element={<Dashboard taskarray={taskArray} setTaskArray={setTaskArray} mode={props.mode} user_id={user.state.id}/>}/>
-                    <Route path='/notifications' element={<h1>Hello</h1>}/>
+                    <Route path='/' element={<Dashboard taskarray={taskArray} setTaskArray={setTaskArray} mode={props.mode} user_id={username.id}/>}/>
+                    <Route path='/Notifications' element={<Notifications/>}/>
                     </Routes>
                 </div>
             </div>
@@ -140,10 +154,10 @@ export default function Home(props) {
                 </div>
             </div>
             {allStates.showCreatePanel && (
-                <CreateNew setShowCreatePanel={setShowCreatePanel} user_id={user.state.id}/>
+                <CreateNew setShowCreatePanel={setShowCreatePanel} user_id={username.id}/>
             )}
             {allStates.addToSide && (
-                <AddToSide setAddToSide={setAddToSide} user_id={user.state.id}/>
+                <AddToSide setAddToSide={setAddToSide} user_id={username.id}/>
             )}
         </div>
         </>

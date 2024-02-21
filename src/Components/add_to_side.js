@@ -9,6 +9,8 @@ export default function AddToSide(props) {
   }
   const handleAdding = (e)=>{
     e.preventDefault()
+    if(!category.name)
+      return
     try{
         axios.post('http://localhost:3000/home/add_side', category)
         .then((res)=>{

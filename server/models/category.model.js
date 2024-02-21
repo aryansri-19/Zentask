@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 const Category = mongoose.Schema({
-    user:{
+    user_id:{
         type: String,
         required: true,
     },

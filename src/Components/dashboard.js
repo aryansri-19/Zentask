@@ -30,7 +30,7 @@ export default function Dashboard(props) {
                     await axios.post('http://localhost:3000/home/delete-task', { user_id: props.user_id, task_name: taskName })
                         .then(toast.info('Task deleted', {
                             position: "top-right",
-                            autoClose: 500,
+                            autoClose: 500  ,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,

@@ -14,6 +14,6 @@ const User = new mongoose.Schema({
         required: true
     }
 })
-var Usermodel = mongoose.model("user", User)
+var UserModel = mongoose.model("user", User)
 
-module.exports = Usermodel
+module.exports = UserModel

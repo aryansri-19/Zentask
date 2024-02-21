@@ -37,7 +37,7 @@ export default function Signup(props) {
                     }
                 })
                 .catch(e => {
-                    alert('Wrong details')
+                    alert('Wrong details / Server connection problem')
                     console.log(e)
                 })
         }

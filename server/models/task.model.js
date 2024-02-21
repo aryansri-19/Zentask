@@ -28,6 +28,10 @@ const Task = mongoose.Schema({
     done:{
         type: Number,
         default: 0
+    },
+    team:{
+        type: String,
+        required: false
     }
 })
 
